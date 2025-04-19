@@ -6,17 +6,12 @@
 class PhoneBook
 {
     private:
-        Contact Contact[7];
+        Contact Contacts[8];
     public:
-        void    add(){
-            std::cout << "you write ADD" << std::endl;
-        }
-        void    search(){
-            std::cout << "you write SEARCH" << std::endl;
-        }
-        void    exit(){
-            std::exit(0);
-        }
+        static int  phBk_number;
+        void        add();
+        void        search();
+        void        exit();
 };
 
 
@@ -28,3 +23,11 @@ class PhoneBook
 
 
 #endif
+
+
+
+
+
+
+
+
