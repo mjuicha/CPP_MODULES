@@ -12,6 +12,7 @@ class Contact
         std::string nickname;
         std::string phone_number;
         std::string darkest_secret;
+        int is_setted;
     public:
         void    set_first_name(std::string name)
         {
@@ -54,10 +55,15 @@ class Contact
         {
             return darkest_secret;
         }
+        void set_contact(int i)
+        {
+            is_setted = i;
+        }
+        int get_setted()
+        {
+            return is_setted;
+        }
 };
 
-
-
-
-
 #endif
+

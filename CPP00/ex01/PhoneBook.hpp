@@ -2,6 +2,7 @@
 # define PHONEBOOK_HPP
 
 # include "Contact.hpp"
+# include <iomanip>
 
 class PhoneBook
 {
@@ -12,6 +13,9 @@ class PhoneBook
         void        add();
         void        search();
         void        exit();
+        void        init_contact();
+        void        list_table();
+        void        show_valid_contact(int i);
 };
 
 
