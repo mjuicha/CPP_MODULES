@@ -76,12 +76,21 @@ void    show_empty_contact(int i)
     std::cout << std::right << std::setfill(' ') << std::setw(11) << '\n';
 }
 
+std::string ten_char(std::string str)
+{
+    if (str.length() <= 10)
+        return str;
+    str.resize(10);
+    str[9] = '.';
+    return str;
+}
+
 void    PhoneBook::show_valid_contact(int i)
 {
     std::cout << std::right << std::setfill(' ') << std::setw(10) << i << '|';
-    std::cout << std::right << std::setfill(' ') << std::setw(10) << Contacts[i].get_firstname() << '|';
-    std::cout << std::right << std::setfill(' ') << std::setw(10) << Contacts[i].get_lastname() << '|';
-    std::cout << std::right << std::setfill(' ') << std::setw(10) << Contacts[i].get_nickname() << '\n';
+    std::cout << std::right << std::setfill(' ') << std::setw(10) <<  ten_char(Contacts[i].get_firstname()) << '|';
+    std::cout << std::right << std::setfill(' ') << std::setw(10) <<  ten_char(Contacts[i].get_lastname()) << '|';
+    std::cout << std::right << std::setfill(' ') << std::setw(10) <<  ten_char(Contacts[i].get_nickname()) << '\n';
 }
 
 void    PhoneBook::list_table()
@@ -97,13 +106,36 @@ void    PhoneBook::list_table()
     }
 }
 
-void    choose_to_display()
+void    PhoneBook::choose_to_display()
 {
     std::string str;
-    std::cout << "Enter the index of the contact to display: ";
+    std::cout << "Enter the index of the contact to display:  ";
     std::getline(std::cin, str);
+    if (str.empty() || !is_number(str))
+    {
+        std::cout << "invalid index !" << std::endl;
+        return ;
+    }
+    int index;
+    std::stringstream ss;
+    ss << str;
+    ss >> index;
+    if (!(index > -1 && index < 8))
+    {
+        std::cout << "invalid index !" << std::endl;
+        return ;
+    }
+    if (Contacts[index].get_setted() == 0)
+        std::cout << "invalid is empty !" << std::endl;
+    else
+    {
+        std::cout << std::left << std::setw(14) <<  "First name" <<  ": " << Contacts[index].get_firstname() << std::endl;
+        std::cout << std::left << std::setw(14) <<  "Last name" <<  ": " << Contacts[index].get_lastname() << std::endl;
+        std::cout << std::left << std::setw(14) <<  "Nickname" <<  ": " << Contacts[index].get_nickname() << std::endl;
+        std::cout << std::left << std::setw(14) <<  "Number Phone" <<  ": " << Contacts[index].get_phonenumber() << std::endl;
+        std::cout << std::left << std::setw(14) <<  "Darkest Secret" <<  ": " << Contacts[index].get_darkestsecret() << std::endl;
 
-
+    }
 }
 
 void    PhoneBook::search()

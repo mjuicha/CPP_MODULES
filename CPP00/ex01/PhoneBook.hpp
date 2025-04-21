@@ -3,6 +3,7 @@
 
 # include "Contact.hpp"
 # include <iomanip>
+# include <sstream> 
 
 class PhoneBook
 {
@@ -16,6 +17,7 @@ class PhoneBook
         void        init_contact();
         void        list_table();
         void        show_valid_contact(int i);
+        void        choose_to_display();
 };
 
 
