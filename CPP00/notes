@@ -8,3 +8,14 @@ also reference &str
 
 understand endl vs \n 
 << >>
+
+/****************************************************************************/
+
+>> check input vs output 
+>> check crazy cases
+>> check errors code 
+>> try to test 
+>> atoi +- .... spaces + ws + empty ..... make it clean 
+
+
+>> then start 02
