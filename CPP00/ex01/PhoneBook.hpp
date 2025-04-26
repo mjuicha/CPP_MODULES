@@ -10,22 +10,15 @@ class PhoneBook
     private:
         Contact Contacts[8];
     public:
-        static int  phBk_number;
+        static int  _index;
+        void        run();
         void        add();
         void        search();
-        void        exit();
-        void        init_contact();
-        void        list_table();
+        void        show_table();
         void        show_valid_contact(int i);
         void        choose_to_display();
+        PhoneBook();
 };
-
-
-
-
-
-
-
 
 
 #endif

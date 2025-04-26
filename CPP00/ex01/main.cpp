@@ -10,16 +10,16 @@ bool    white_space(std::string str)
 
 bool    is_number(std::string str)
 {
-    int i = 0;
+    size_t i = 0;
     if (str[i] == '+')
     {
-        if (!str[i + 1])
+        if (str.length() == 1)
             return false;
         i++;
     }
-    while (str[i])
+    while (i < str.length())
     {
-        if  (!isdigit(str[i]))
+        if  (!std::isdigit(str[i]))
             return false;
         i++;
     }
@@ -52,6 +52,13 @@ std::string    get_phone_number(std::string msg)
     return str;
 }
 
+void    set_index()
+{
+    PhoneBook::_index++;
+    if (PhoneBook::_index == 8)
+        PhoneBook::_index = 0;
+}
+
 void    PhoneBook::add()
 {
     std::string first_name = get_line("enter first name : ");
@@ -59,13 +66,14 @@ void    PhoneBook::add()
     std::string nickname = get_line("enter nickname : ");
     std::string phone_number = get_phone_number("enter phone number : ");
     std::string darkest_secret = get_line("enter darkest secret : ");
-    // here i want to set the vars in phonebook it has his elements like the naming up here
-    Contacts[phBk_number].set_contact(1);
-    Contacts[phBk_number].set_first_name(first_name);
-    Contacts[phBk_number].set_last_name(last_name);
-    Contacts[phBk_number].set_nickname(nickname);
-    Contacts[phBk_number].set_phone_number(phone_number);
-    Contacts[phBk_number].set_darkest_secret(darkest_secret);
+
+    Contacts[_index].set_contact(1);
+    Contacts[_index].set_first_name(first_name);
+    Contacts[_index].set_last_name(last_name);
+    Contacts[_index].set_nickname(nickname);
+    Contacts[_index].set_phone_number(phone_number);
+    Contacts[_index].set_darkest_secret(darkest_secret);
+    set_index();
 }
 
 void    show_empty_contact(int i)
@@ -93,12 +101,12 @@ void    PhoneBook::show_valid_contact(int i)
     std::cout << std::right << std::setfill(' ') << std::setw(10) <<  ten_char(Contacts[i].get_nickname()) << '\n';
 }
 
-void    PhoneBook::list_table()
+void    PhoneBook::show_table()
 {
     int i = 0;
     while (i < 8)
     {
-        if (!Contacts[i].get_setted())
+        if (Contacts[i].get_setted() == 0)
             show_empty_contact(i);
         else
             show_valid_contact(i);
@@ -134,62 +142,118 @@ void    PhoneBook::choose_to_display()
         std::cout << std::left << std::setw(14) <<  "Nickname" <<  ": " << Contacts[index].get_nickname() << std::endl;
         std::cout << std::left << std::setw(14) <<  "Number Phone" <<  ": " << Contacts[index].get_phonenumber() << std::endl;
         std::cout << std::left << std::setw(14) <<  "Darkest Secret" <<  ": " << Contacts[index].get_darkestsecret() << std::endl;
-
     }
 }
 
 void    PhoneBook::search()
 {
-    list_table();
+    show_table();
     choose_to_display();
 }
 
-void    PhoneBook::exit()
-{
-    std::exit(0);
-}
-int PhoneBook::phBk_number = 0;
+int PhoneBook::_index = 0;
 
-std::string get_phonebook_input(std::string input)
+std::string display_prompt(std::string input)
 {
     std::cout << "Welcome in med PhoneBook : ";
     std::getline(std::cin, input);
     return input;
 }
 
-void    PhoneBook::init_contact()
+// special 
+int Contact::get_setted()
+{
+    return is_setted;
+}
+
+void Contact::set_contact(int i)
+{
+    is_setted = i;
+}
+/**************/
+// setters
+/**************/
+
+void    Contact::set_first_name(std::string name)
+{
+    first_name = name;
+}
+
+void    Contact::set_last_name(std::string name)
+{
+    last_name = name;
+}
+
+void    Contact::set_nickname(std::string name)
+{
+    nickname = name;
+}
+
+void    Contact::set_phone_number(std::string name)
+{
+    phone_number = name;
+}
+
+void    Contact::set_darkest_secret(std::string name)
+{
+    darkest_secret = name;
+}
+
+/**************/
+// getters
+/**************/
+std::string Contact::get_firstname()
+{
+    return first_name;
+}
+
+std::string Contact::get_lastname()
+{
+    return last_name;
+}
+
+std::string Contact::get_nickname()
+{
+    return nickname;
+}
+
+std::string Contact::get_phonenumber()
+{
+    return phone_number;
+}
+
+std::string Contact::get_darkestsecret()
+{
+    return darkest_secret;
+}
+
+
+
+PhoneBook::PhoneBook()
 {
     int i = -1;
-
     while (++i < 8)
         Contacts[i].set_contact(0);
 }
 
-void    phonebook_input()
+void    PhoneBook::run()
 {
-    PhoneBook PhoneBook;
     std::string input;
-    PhoneBook.init_contact();
     while (1)
     {
-        input = get_phonebook_input(input);
+        input = display_prompt(input);
         if (input == "ADD")
-        {
-            PhoneBook.add();
-            // PhoneBook.listall();
-            PhoneBook.phBk_number++;
-            if (PhoneBook.phBk_number == 8)
-                PhoneBook.phBk_number = 0;
-        }
+            add();
         else if (input == "SEARCH")
-            PhoneBook.search();
+            search();
         else if (input == "EXIT")
-            PhoneBook.exit();
+            return ;
     }
 }
 
 int main()
 {
-    phonebook_input();
-    return (0);
+    PhoneBook PhoneBook;
+    PhoneBook.run();
+    return 0;
 }
