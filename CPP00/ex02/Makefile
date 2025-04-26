@@ -1,8 +1,10 @@
-SRCS = megaphone.cpp \
+SRCS = Account.cpp tests.cpp\
+
+HEADER = Account.hpp \
 
 OBJS = $(SRCS:%.cpp=%.o)
 
-NAME = megaphone
+NAME = Account
 
 CC = c++
 
@@ -13,7 +15,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(CC) $(FLAGS) $(OBJS) -o $(NAME)
 
-%.o: %.cpp
+%.o: %.cpp $(HEADER)
 	$(CC) $(FLAGS) -c $< -o $@
 
 clean:	
@@ -26,5 +28,4 @@ re:	fclean all
 
 .PHONY:	all clean fclean re
 
-#https://42correction.netlify.app/
-#https://github.com/arbutnar/cppModules/tree/master/Module00/ex01
+#relink ??
