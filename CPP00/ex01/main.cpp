@@ -1,11 +1,24 @@
 #include "PhoneBook.hpp"
 #include <cctype>
 
-// Reference is when we add & like here in str
-
-bool    white_space(std::string str)
+bool alphabets(std::string str)
 {
-    return std::all_of(str.begin(), str.end(), isspace);
+    for (std::string::iterator it = str.begin(); it != str.end(); ++it)
+    {
+        if (!std::isalpha(*it))
+            return false;
+    }
+    return true;
+}
+
+bool white_space(std::string str)
+{
+    for (std::string::iterator it = str.begin(); it != str.end(); ++it)
+    {
+        if (!std::isspace(*it))
+            return false;
+    }
+    return true;
 }
 
 bool    is_number(std::string str)
@@ -26,12 +39,19 @@ bool    is_number(std::string str)
     return true;
 }
 
+void    error(void)
+{
+    std::cerr << "\nERROR" << std::endl;
+    std::exit(1);
+}
+
 std::string    get_line(std::string msg)
 {
     std::string str;
     std::cout << msg;
-    std::getline(std::cin, str);
-    if (str.empty() || white_space(str))
+    if (!std::getline(std::cin, str))
+        error();
+;    if (str.empty() || white_space(str) || !alphabets(str))
     {
         std::cout << "invalid input" << std::endl;
         str = get_line(msg);
@@ -43,7 +63,8 @@ std::string    get_phone_number(std::string msg)
 {
     std::string str;
     std::cout << msg;
-    std::getline(std::cin, str);
+    if (!std::getline(std::cin, str))
+        error();
     if (str.empty() || white_space(str) || !is_number(str))
     {
         std::cout << "invalid input" << std::endl;
@@ -117,8 +138,9 @@ void    PhoneBook::show_table()
 void    PhoneBook::choose_to_display()
 {
     std::string str;
-    std::cout << "Enter the index of the contact to display:  ";
-    std::getline(std::cin, str);
+    std::cout << "Enter the index of the contact to display: ";
+    if (!std::getline(std::cin, str))
+        error();
     if (str.empty() || !is_number(str))
     {
         std::cout << "invalid index !" << std::endl;
@@ -156,7 +178,8 @@ int PhoneBook::_index = 0;
 std::string display_prompt(std::string input)
 {
     std::cout << "Welcome in med PhoneBook : ";
-    std::getline(std::cin, input);
+    if (!std::getline(std::cin, input))
+        return "EXIT";
     return input;
 }
 
@@ -171,7 +194,7 @@ void Contact::set_contact(int i)
     is_setted = i;
 }
 /**************/
-// setters
+//  setters   //
 /**************/
 
 void    Contact::set_first_name(std::string name)
@@ -200,7 +223,7 @@ void    Contact::set_darkest_secret(std::string name)
 }
 
 /**************/
-// getters
+//  getters   //
 /**************/
 std::string Contact::get_firstname()
 {
