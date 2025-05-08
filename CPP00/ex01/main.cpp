@@ -1,16 +1,6 @@
 #include "PhoneBook.hpp"
 #include <cctype>
 
-bool alphabets(std::string str)
-{
-    for (std::string::iterator it = str.begin(); it != str.end(); ++it)
-    {
-        if (!std::isalpha(*it))
-            return false;
-    }
-    return true;
-}
-
 bool white_space(std::string str)
 {
     for (std::string::iterator it = str.begin(); it != str.end(); ++it)
@@ -51,9 +41,9 @@ std::string    get_line(std::string msg)
     std::cout << msg;
     if (!std::getline(std::cin, str))
         error();
-;    if (str.empty() || white_space(str) || !alphabets(str))
+;    if (str.empty() || white_space(str))
     {
-        std::cout << "invalid input" << std::endl;
+        std::cout << "❌ Invalid. Try again." << std::endl;
         str = get_line(msg);
     }
     return str;
@@ -67,7 +57,7 @@ std::string    get_phone_number(std::string msg)
         error();
     if (str.empty() || white_space(str) || !is_number(str))
     {
-        std::cout << "invalid input" << std::endl;
+        std::cout << "❌ Invalid. Try again." << std::endl;
         str = get_phone_number(msg);
     }
     return str;
@@ -143,7 +133,7 @@ void    PhoneBook::choose_to_display()
         error();
     if (str.empty() || !is_number(str))
     {
-        std::cout << "invalid index !" << std::endl;
+        std::cout << "❌ Invalid index !" << std::endl;
         return ;
     }
     int index;
@@ -152,11 +142,11 @@ void    PhoneBook::choose_to_display()
     ss >> index;
     if (!(index > -1 && index < 8))
     {
-        std::cout << "invalid index !" << std::endl;
+        std::cout << "❌ Invalid index !" << std::endl;
         return ;
     }
     if (Contacts[index].get_setted() == 0)
-        std::cout << "invalid is empty !" << std::endl;
+        std::cout << "❌ Invalid. Contact is empty !" << std::endl;
     else
     {
         std::cout << std::left << std::setw(14) <<  "First name" <<  ": " << Contacts[index].get_firstname() << std::endl;
@@ -177,7 +167,7 @@ int PhoneBook::_index = 0;
 
 std::string display_prompt(std::string input)
 {
-    std::cout << "Welcome in med PhoneBook : ";
+    std::cout << "> ";
     if (!std::getline(std::cin, input))
         return "EXIT";
     return input;
@@ -257,6 +247,11 @@ PhoneBook::PhoneBook()
     int i = -1;
     while (++i < 8)
         Contacts[i].set_contact(0);
+    std::cout << "📞 Welcome to your PhoneBook!" << std::endl;
+    std::cout << "Type one of the following commands:" << std::endl;
+    std::cout << "  🔹 ADD    → Add a new contact" << std::endl;
+    std::cout << "  🔹 SEARCH → Search and display contacts" << std::endl;
+    std::cout << "  🔹 EXIT   → Quit the program" << std::endl;
 }
 
 void    PhoneBook::run()

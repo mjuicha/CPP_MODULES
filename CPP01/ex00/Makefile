@@ -1,10 +1,10 @@
-SRCS = main.cpp\
+SRCS = Zombie.cpp main.cpp newZombie.cpp randomChump.cpp\
 
-HEADER = PhoneBook.hpp Contact.hpp \
+HEADER = Zombie.hpp \
 
 OBJS = $(SRCS:%.cpp=%.o)
 
-NAME = phonebook
+NAME = Brainz
 
 CC = c++
 

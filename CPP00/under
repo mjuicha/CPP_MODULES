@@ -30,3 +30,17 @@ display Accounts Infos;
 private is clear 
 
  
+// manipulator control and format ostream 
+// string object cantain sequence of chars || auto mem || methods and operators
+//                    || safe
+// cout is obj used to get a seq of data to send it to ostream 
+// oop is prog model make code more structured by using classed rather than func & logic
+// class is user def datatype , contain data members + methods accessed by object  
+// obj is an instance of class .
+// stream is for send & read data from iostream
+// reference allow to modify to original var passed.
+// iterator are used to access elements of data structor.
+// stringstream class is comb b str and stream , useful in parsing (conv str to int float ..  vv)
+// constructor is special method work by default when an obj created 
+// destructor ... 
+// 

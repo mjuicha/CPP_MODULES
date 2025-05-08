@@ -25,6 +25,3 @@ fclean:	clean
 re:	fclean all
 
 .PHONY:	all clean fclean re
-
-#https://42correction.netlify.app/
-#https://github.com/arbutnar/cppModules/tree/master/Module00/ex01

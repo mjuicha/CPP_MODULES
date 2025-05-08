@@ -18,8 +18,7 @@ std::string form(int number, int size)
     return sd.str();
 }
 
-
-void	Account::_displayTimestamp()
+void	Account::_displayTimestamp( void )
 {
     time_t timeg = time(0);
     tm *timex = localtime(&timeg);
@@ -53,11 +52,7 @@ int	Account::getNbWithdrawals( void )
     return _totalNbWithdrawals;
 }
 
-
-
-
-
-void Account::displayAccountsInfos()
+void Account::displayAccountsInfos( void )
 {
     _displayTimestamp();
     std::cout << "accounts:" << getNbAccounts() << ";total:" << getTotalAmount()
@@ -65,7 +60,7 @@ void Account::displayAccountsInfos()
               << ";withdrawals:" << getNbWithdrawals() << std::endl;
 }
 
-Account::Account(int initial_deposit)
+Account::Account( int initial_deposit )
 {
     _nbAccounts++;
     _accountIndex = _nbAccounts - 1;
@@ -78,8 +73,9 @@ Account::Account(int initial_deposit)
                             << ";created" << std::endl;
 }
 
-Account::~Account()
+Account::~Account( void )
 {
+    _nbAccounts--;
     _displayTimestamp();
     std::cout << "index:" << _accountIndex << ";amount:" << _amount
                             << ";closed" << std::endl;
@@ -117,7 +113,7 @@ int		Account::checkAmount( void ) const
 bool	Account::makeWithdrawal( int withdrawal )
 {
    _displayTimestamp();
-   std::cout << "index:" << _accountIndex << ";p_amount:" << _amount 
+   std::cout << "index:" << _accountIndex << ";p_amount:" << _amount
                         << ";withdrawal:";
    _amount -= withdrawal;
     if (!checkAmount())
