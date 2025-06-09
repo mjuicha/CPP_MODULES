@@ -4,7 +4,7 @@ HEADER = Harl.hpp\
 
 OBJS = $(SRCS:%.cpp=%.o)
 
-NAME = Brainz
+NAME = Harl
 
 CC = c++
 

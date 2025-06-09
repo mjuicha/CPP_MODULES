@@ -4,7 +4,7 @@ HEADER = HumanA.hpp HumanB.hpp Weapon.hpp\
 
 OBJS = $(SRCS:%.cpp=%.o)
 
-NAME = Brainz
+NAME = AttackOnZombie
 
 CC = c++
 

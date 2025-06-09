@@ -2,7 +2,7 @@ SRCS = main.cpp\
 
 OBJS = $(SRCS:%.cpp=%.o)
 
-NAME = Brainz
+NAME = Brain
 
 CC = c++
 

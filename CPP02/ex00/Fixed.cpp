@@ -35,3 +35,4 @@ void    Fixed::setRawBits( int const raw )
 {
     number = raw;
 }
+ 

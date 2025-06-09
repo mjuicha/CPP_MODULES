@@ -4,7 +4,7 @@ HEADER = Zombie.hpp \
 
 OBJS = $(SRCS:%.cpp=%.o)
 
-NAME = Brainz
+NAME = HordeOfZombies
 
 CC = c++
 

@@ -41,13 +41,13 @@ void    msg(void)
 int getLevelIndex(std::string level)
 {
     if (level == "DEBUG")
-        return 4;
-    if (level == "INFO")
-        return 3;
-    if (level == "WARNING")
-        return 2;
-    if (level == "ERROR")
         return 1;
+    if (level == "INFO")
+        return 2;
+    if (level == "WARNING")
+        return 3;
+    if (level == "ERROR")
+        return 4;
     return 0;
 }
 
@@ -55,13 +55,13 @@ int getLevelIndex(std::string level)
 void    Harl::complain( std::string level )
 {
     switch (getLevelIndex(level)) {
-        case 4:
-            debug();
-        case 3:
-            info();
-        case 2:
-            warning();
         case 1:
+            debug();
+        case 2:
+            info();
+        case 3:
+            warning();
+        case 4:
             error();
             break;
         default:

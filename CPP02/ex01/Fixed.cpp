@@ -1,5 +1,7 @@
 #include "Fixed.hpp"
 
+/************************ Orthodox Canonical Form **************************/
+
 Fixed::Fixed()
 {
     number = 0;
@@ -25,6 +27,8 @@ Fixed::~Fixed()
     std::cout << "Destructor called" << std::endl;
 }
 
+/******************** Constructors for int and float **************/
+
 Fixed::Fixed(const int nbr)
 {
     std::cout << "Int constructor called" << std::endl;
@@ -34,8 +38,10 @@ Fixed::Fixed(const int nbr)
 Fixed::Fixed(const float flt)
 {
     std::cout << "Float constructor called" << std::endl;
-    number = roundf(flt * (1 << bits));
+    number = roundf(flt * 256);
 }
+
+/************************* Member Functions **************************/
 
 std::ostream& operator<<(std::ostream& out, const Fixed& fix)
 {
@@ -52,3 +58,4 @@ int     Fixed::toInt( void ) const
 {
     return number >> bits;
 }
+

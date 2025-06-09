@@ -4,7 +4,7 @@ HEADER = Zombie.hpp \
 
 OBJS = $(SRCS:%.cpp=%.o)
 
-NAME = Brainz
+NAME = Zombie
 
 CC = c++
 
@@ -27,5 +27,3 @@ fclean:	clean
 re:	fclean all
 
 .PHONY:	all clean fclean re
-
-#DONE

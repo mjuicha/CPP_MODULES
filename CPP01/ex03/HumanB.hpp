@@ -9,10 +9,10 @@ class HumanB
         std::string name;
         Weapon*      weap;
     public:
-        void    attack( void );
         HumanB(std::string str);
-        HumanB(std::string str, Weapon &club);
-        void    setWeapon(Weapon &weeep);
+        
+        void    setWeapon(Weapon& weeeap);
+        void    attack( void );
 };
 
 

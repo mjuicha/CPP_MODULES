@@ -3,12 +3,9 @@
 int main()
 {
     Zombie* z;
-    z = newZombie("hassan");
+    z = newZombie("HeapZombie");
     z->announce();
-    randomChump("la");
-
+    randomChump("StackZombie");
     delete z;
    return (0);
 }
-
-//set name

@@ -2,18 +2,19 @@
 
 void    HumanB::attack( void )
 {
-    std::cout << name << " attacks with their " << (*weap).getType()
-    << std::endl;
+    if (weap == NULL)
+    {
+        std::cout << name << " has no weapon to attack with." << std::endl;
+        return ;
+    }
+    std::cout << name << " attacks with their " << (*weap).getType();
+    std::cout << std::endl;
 }
 
 HumanB::HumanB(std::string str)
 : name(str), weap(NULL) {}
 
-HumanB::HumanB(std::string str, Weapon &club)
-     : name(str), weap(&club) {}
-
-
-void    HumanB::setWeapon(Weapon &weeep)
+void    HumanB::setWeapon(Weapon &weeeap)
 {
-    weap = &weeep;
+    weap = &weeeap;
 }

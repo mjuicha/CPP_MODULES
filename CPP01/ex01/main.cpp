@@ -1,10 +1,10 @@
 #include "Zombie.hpp"
 
-# define N 1
 int main()
 {
     Zombie* z;
-    z = zombieHorde(N, "simo");
+    int     N = 10;
+    z = zombieHorde(N, "Zombie");
     if (!z)
         return 1;
     for (int i = 0; i < N; i++)
@@ -12,6 +12,5 @@ int main()
         z[i].announce();
     }
     delete [] z;
-    z = NULL;
     return 0;
 }

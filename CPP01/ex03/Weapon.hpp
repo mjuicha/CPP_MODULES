@@ -10,12 +10,9 @@ class Weapon
     public:
         Weapon();
         Weapon( std::string str );
-        std::string getType( void ) const;
-        void        setType( std::string value );
+        const   std::string& getType( void ) const;
+        void    setType( std::string value );
 };
 
 
 #endif
-
-
-//done

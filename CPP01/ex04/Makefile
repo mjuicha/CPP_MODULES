@@ -1,9 +1,10 @@
-SRCS = main.cpp\
+SRCS = main.cpp replace.cpp\
 
-# HEADER = 
+HEADER = replace.hpp\
+
 OBJS = $(SRCS:%.cpp=%.o)
 
-NAME = Brainz
+NAME = replace
 
 CC = c++
 
@@ -14,7 +15,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(CC) $(FLAGS) $(OBJS) -o $(NAME)
 
-%.o: %.cpp
+%.o: %.cpp $(HEADER)
 	$(CC) $(FLAGS) -c $< -o $@
 
 clean:	

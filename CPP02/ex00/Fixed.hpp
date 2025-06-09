@@ -11,7 +11,7 @@ class Fixed
 
     public:
         Fixed();
-        Fixed(const Fixed &fix);
+        Fixed(const Fixed& fix);
         Fixed& operator=(const Fixed& fix);
         ~Fixed();
 

@@ -1,10 +1,5 @@
 #include "Zombie.hpp"
 
-void    Zombie::set_name(std::string str)
-{
-    name = str;
-}
-
 Zombie* zombieHorde( int N, std::string str )
 {
     if (N <= 0)

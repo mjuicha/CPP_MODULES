@@ -35,7 +35,7 @@ void Harl::error( void )
 
 void    Harl::complain( std::string level )
 {
-    void    (Harl::*func[4])() = 
+    void    (Harl::*func[4])(void) = 
     {
         &Harl::debug,
         &Harl::info,
