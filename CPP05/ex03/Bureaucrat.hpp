@@ -6,7 +6,11 @@
 
 #include <iostream>
 #include <exception>
+#include <fstream>
 
+#include "AForm.hpp"
+
+class AForm;
 class Bureaucrat
 {
     private:
@@ -28,15 +32,20 @@ class Bureaucrat
         int getGrade() const;
         std::string getName() const;
 
+        // signForm
+        void signForm(AForm& F) const;
+        // executeForm
+        void executeForm(AForm const & form) const;
+        
         class GradeTooHighException : public std::exception
         {
             public:
-                const char* what() const throw();
+                virtual const char* what() const throw();
         };
         class GradeTooLowException : public std::exception
         {
             public:
-                const char* what() const throw();
+                virtual const char* what() const throw();
         };
 };
 

@@ -1,7 +1,6 @@
-#error in signing
-SRCS = Bureaucrat.cpp main.cpp Form.cpp
+SRCS = AForm.cpp Bureaucrat.cpp PresidentialPardonForm.cpp RobotomyRequestForm.cpp ShrubberyCreationForm.cpp main.cpp Intern.cpp
 
-HEADER = Bureaucrat.hpp Form.hpp
+HEADER = AForm.hpp Bureaucrat.hpp PresidentialPardonForm.hpp RobotomyRequestForm.hpp ShrubberyCreationForm.hpp Intern.hpp
 
 OBJS = $(SRCS:%.cpp=%.o)
 

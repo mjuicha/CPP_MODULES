@@ -32,20 +32,21 @@ class Bureaucrat
         std::string getName() const;
 
         // signForm
-
         void signForm(Form& F) const;
+
+        // exceptions
         class GradeTooHighException : public std::exception
         {
             public:
-                virtual const char* what() const throw();
+                const char* what() const throw();
         };
         class GradeTooLowException : public std::exception
         {
             public:
-                virtual const char* what() const throw();
+                const char* what() const throw();
         };
 };
-
+// cout operator
 std::ostream&   operator<<(std::ostream& o, const Bureaucrat& B);
 
 #endif

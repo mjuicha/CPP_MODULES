@@ -1,6 +1,6 @@
 #include "Bureaucrat.hpp"
 
-// Orthodox Form
+// Orthodox AForm
 
 Bureaucrat::Bureaucrat() : name("Unknown"), grade(1)
 {}
@@ -37,7 +37,6 @@ std::string Bureaucrat::getName() const
 {
     return name;
 }
-
 int Bureaucrat::getGrade() const
 {
     return grade;
@@ -51,7 +50,6 @@ int Bureaucrat::inc_grade()
         throw Bureaucrat::GradeTooHighException();
     return grade;
 }
-
 int Bureaucrat::dec_grade()
 {
     grade++;
@@ -60,21 +58,37 @@ int Bureaucrat::dec_grade()
         throw Bureaucrat::GradeTooLowException();
     return grade;
 }
-// #error in signing
-// #error in signing
 
-void Bureaucrat::signForm(Form& F) const
+// signForm
+void Bureaucrat::signForm(AForm& F) const
 {
     try
     {
         F.beSigned(*this);
         std::cout << getName() << " signs " << F << std::endl;
     }
-    catch (const Form::GradeTooLowException& e)
+    catch (const AForm::GradeTooLowException& e)
     {
         std::cout << getName() << " cannot sign " << F << " because: " << e.what() << std::endl;
     }
 }
+
+// executeForm
+
+void Bureaucrat::executeForm(AForm const & form) const
+{
+    try
+    {
+        form.execute(*this);
+        std::cout << getName() << " executes " << form << std::endl;
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << getName() << " cannot execute " << form << " because: " << e.what() << std::endl;
+    }
+}
+
+// Exceptions
 const char* Bureaucrat::GradeTooHighException::what() const throw()
 {
     return "Grade too high.";
@@ -83,5 +97,3 @@ const char* Bureaucrat::GradeTooLowException::what() const throw()
 {
     return "Grade too low.";
 }
-
-// #error in signing

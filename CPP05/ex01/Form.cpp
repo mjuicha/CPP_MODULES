@@ -33,7 +33,6 @@ Form::~Form()
 {}
 
 // getters
-
 int Form::getGradeToSign() const
 {
     return grade_to_sign;
@@ -42,17 +41,16 @@ int Form::getGradeToExecute() const
 {
     return grade_to_execute;
 }
-
 const std::string& Form::getName() const
 {
     return name;
 }
-
 bool Form::getIsSigned() const
 {
     return is_signed;
 }
 
+// beSigned
 void Form::beSigned(const Bureaucrat& B)
 {
    if (B.getGrade() <= grade_to_sign)
@@ -64,16 +62,17 @@ void Form::beSigned(const Bureaucrat& B)
        throw Form::GradeTooLowException();
 }
 
+// exceptions
 const char* Form::GradeTooHighException::what() const throw()
 {
     return "Form: Grade too high";
 }
-
 const char* Form::GradeTooLowException::what() const throw()
 {
     return "Form: Grade too low";
 }
 
+// cout operator
 std::ostream& operator<<(std::ostream& o, const Form& F)
 {
     o << "Form: " << F.getName() << ", is signed: " << (F.getIsSigned() ? "yes" : "no")
