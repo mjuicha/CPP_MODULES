@@ -20,13 +20,25 @@ Intern &Intern::operator=(const Intern &other)
 Intern::~Intern()
 {}
 
-// member function
+AForm *Intern::makeRobotomyRequestForm(const std::string target) const
+{
+    return new RobotomyRequestForm(target);
+}
+
+AForm *Intern::makeShrubberyCreationForm(const std::string target) const
+{
+    return new ShrubberyCreationForm(target);
+}
+
+AForm *Intern::makePresidentialPardonForm(const std::string target) const
+{
+    return new PresidentialPardonForm(target);
+}
 
 const char* Intern::FormNotFoundException::what() const throw()
 {
     return "Form not found";
 }
-
 
 AForm *Intern::makeForm(const std::string &formName, const std::string &target) const
 {
@@ -36,11 +48,11 @@ AForm *Intern::makeForm(const std::string &formName, const std::string &target) 
         "shrubbery creation",
         "presidential pardon"
     };
-    AForm *forms[3] =
+    AForm* (Intern:: *forms[3])(const std::string target) const =
     {
-        new RobotomyRequestForm(target),
-        new ShrubberyCreationForm(target),
-        new PresidentialPardonForm(target)
+        &Intern::makeRobotomyRequestForm,
+        &Intern::makeShrubberyCreationForm,
+        &Intern::makePresidentialPardonForm
     };
     try
     {
@@ -49,7 +61,7 @@ AForm *Intern::makeForm(const std::string &formName, const std::string &target) 
             if (formName == formTypes[i])
             {
                 std::cout << "Intern creates " << formName << " form." << std::endl;
-                return forms[i];
+                return (this->*forms[i])(target);
             }
         }
         throw Intern::FormNotFoundException();
@@ -60,3 +72,4 @@ AForm *Intern::makeForm(const std::string &formName, const std::string &target) 
     }
     return NULL;
 }
+

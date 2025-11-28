@@ -19,33 +19,33 @@ class Bureaucrat
     
     public:
         Bureaucrat();
-        Bureaucrat(std::string name, int grade);
+        Bureaucrat(const std::string &name, int grade);
         Bureaucrat(const Bureaucrat& B);
         Bureaucrat& operator=(const Bureaucrat& B);
         ~Bureaucrat();
 
         // member functions
-        int inc_grade();
-        int dec_grade();
+        void inc_grade();
+        void dec_grade();
 
         // getters
         int getGrade() const;
         std::string getName() const;
 
         // signForm
-        void signForm(AForm& F) const;
+        void signForm(AForm& F);
         // executeForm
         void executeForm(AForm const & form) const;
         
         class GradeTooHighException : public std::exception
         {
             public:
-                virtual const char* what() const throw();
+                const char* what() const throw();
         };
         class GradeTooLowException : public std::exception
         {
             public:
-                virtual const char* what() const throw();
+                const char* what() const throw();
         };
 };
 

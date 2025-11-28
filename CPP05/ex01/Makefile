@@ -1,20 +1,19 @@
-#error in signing
 SRCS = Bureaucrat.cpp main.cpp Form.cpp
 
 HEADER = Bureaucrat.hpp Form.hpp
 
 OBJS = $(SRCS:%.cpp=%.o)
 
-type = a.out
+NAME = form
 
 CC = c++
 
 FLAGS = -Wall -Wextra -Werror -std=c++98
 
-all: $(type)
+all: $(NAME)
 
-$(type): $(OBJS)
-	$(CC) $(FLAGS) $(OBJS) -o $(type)
+$(NAME): $(OBJS)
+	$(CC) $(FLAGS) $(OBJS) -o $(NAME)
 
 %.o: %.cpp $(HEADER)
 	$(CC) $(FLAGS) -c $< -o $@
@@ -23,7 +22,7 @@ clean:
 	rm -rf $(OBJS)
 
 fclean:	clean
-	rm -rf $(type)
+	rm -rf $(NAME)
 
 re:	fclean all
 

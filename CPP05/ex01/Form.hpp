@@ -2,6 +2,7 @@
 #define FORM_HPP
 
 #include "Bureaucrat.hpp"
+
 class Bureaucrat;
 
 class Form
@@ -14,7 +15,7 @@ class Form
 
     public:
         Form();
-        Form(std::string name, int grade_to_sign, int grade_to_execute);
+        Form(const std::string &name, int grade_to_sign, int grade_to_execute);
         Form(const Form& F);
         Form& operator=(const Form& F);
         ~Form();
@@ -24,13 +25,14 @@ class Form
         // getters
         int getGradeToSign() const;
         int getGradeToExecute() const;
-        const std::string& getName() const;
+        std::string getName() const;
         bool getIsSigned() const;
 
         // beSigned
         void beSigned(const Bureaucrat& B);
 
-        // exceptions
+        int verifyGrade(int grade) const;
+
         class GradeTooHighException : public std::exception
         {
             public:
@@ -43,7 +45,6 @@ class Form
         };
 };
 
-// cout operator
 std::ostream& operator<<(std::ostream& o, const Form& F);
 
 #endif

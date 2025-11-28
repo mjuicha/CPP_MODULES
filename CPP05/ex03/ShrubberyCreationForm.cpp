@@ -5,7 +5,6 @@ ShrubberyCreationForm::ShrubberyCreationForm(): AForm("ShrubberyCreationForm", 1
 
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target) : AForm("ShrubberyCreationForm", 145, 137), target(target) 
 {}
-// empty case 
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &SCF) : AForm(SCF)
 {

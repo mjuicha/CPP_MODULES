@@ -15,7 +15,7 @@ class AForm
 
     public:
         AForm();
-        AForm(std::string name, int grade_to_sign, int grade_to_execute);
+        AForm(const std::string &name, int grade_to_sign, int grade_to_execute);
         AForm(const AForm& F);
         AForm& operator=(const AForm& F);
         virtual ~AForm();
@@ -26,13 +26,14 @@ class AForm
         // getters
         int getGradeToSign() const;
         int getGradeToExecute() const;
-        const std::string& getName() const;
+        std::string getName() const;
         bool getIsSigned() const;
 
         // beSigned
         void beSigned(const Bureaucrat& B);
 
-        // exceptions
+        int verifyGrade(int grade) const;
+
         class GradeTooHighException : public std::exception
         {
             public:

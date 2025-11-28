@@ -4,27 +4,21 @@
 #include "PresidentialPardonForm.hpp"
 #include "Intern.hpp"
 
+
 int main()
 {
+	Intern someRandomIntern;
+	AForm *rrf = someRandomIntern.makeForm("robotomy request", "Bender");
 	try
 	{
-		Intern someRandomIntern;
-		AForm *rrf;
-		rrf = someRandomIntern.makeForm("robotomy request", "Bender");
-		Intern random;
-		AForm *form;
-
-		form = random.makeForm("shrubbery creation", "Bender");
-		delete form;
-		form = random.makeForm("robotomy request", "Bender");
-		delete form;
-		form = random.makeForm("presidential pardon", "Bender");
-		delete form;
-		form = random.makeForm("bad form", "Bender");
+		Bureaucrat bender("Bender", 1);
+		bender.signForm(*rrf);
+		bender.executeForm(*rrf);
 	}
 	catch (const std::exception &e)
 	{
 		std::cerr << e.what() << '\n';
-	} 
+	}
+	delete rrf;
 	return 0;
 }

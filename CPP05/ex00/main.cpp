@@ -2,18 +2,20 @@
 
 int main()
 {
-    Bureaucrat B1("low", 149);
-    Bureaucrat B2("high", 1);
-    std::cout << B1 << std::endl;
-    std::cout << B2 << std::endl;
     try
     {
+        Bureaucrat B1("low", 150);
+        Bureaucrat B2("high", 3);
+        std::cout << B1 << std::endl;
+        std::cout << B2 << std::endl;
         B1.dec_grade();
         B2.inc_grade();
+        std::cout << B1 << std::endl;
+        std::cout << B2 << std::endl;
     }
-    catch (std::exception & e)
+    catch (int n)
     {
-        std::cout << "catching : " << e.what();
+        std::cerr << "catching exception: " << std::endl;
     }
     return 0;
 }

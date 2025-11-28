@@ -7,34 +7,33 @@
 #include <iostream>
 #include <exception>
 
-#include "Form.hpp"
+#inclt std::string name;
+        int grade;
+    
+    public:
+        Bureaucrat();
+        Bureaucrat(const std::string &name, int grade);
+        Bureaucrat(const Bureaucrat& B);
+        Bureaucrat& operator=(const Bureaucrat& B);
+        ~Bureaucratude "Form.hpp"
 
 class Form;
 class Bureaucrat
 {
     private:
-        const std::string name;
-        int grade;
-    
-    public:
-        Bureaucrat();
-        Bureaucrat(std::string name, int grade);
-        Bureaucrat(const Bureaucrat& B);
-        Bureaucrat& operator=(const Bureaucrat& B);
-        ~Bureaucrat();
+        cons();
 
         // member functions
-        int inc_grade();
-        int dec_grade();
+        void inc_grade();
+        void dec_grade();
 
         // getters
         int getGrade() const;
         std::string getName() const;
 
         // signForm
-        void signForm(Form& F) const;
+        void signForm(Form& F);
 
-        // exceptions
         class GradeTooHighException : public std::exception
         {
             public:
@@ -46,7 +45,7 @@ class Bureaucrat
                 const char* what() const throw();
         };
 };
-// cout operator
+
 std::ostream&   operator<<(std::ostream& o, const Bureaucrat& B);
 
 #endif

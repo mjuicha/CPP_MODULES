@@ -7,38 +7,29 @@ int main(void)
 {
 	srand(time(NULL));
 
+	try
+	{
+		Bureaucrat bureaucrat("BURO", 2);
+		ShrubberyCreationForm form1("Shrubbery");
+		RobotomyRequestForm form2("Robotomy");
+		PresidentialPardonForm form3("President");
 
-	std::cout << "\033[33m" << std::endl << "Test ex02" << "\033[0m" << std::endl;
-
-	std::cout << "\033[33m" << std::endl << "Test ex02 ShrubberyCreationForm" << "\033[0m" << std::endl;
-	Bureaucrat Mr_Shrubby("Mr_Shrubby", 130);
-	ShrubberyCreationForm Shrubby_form("Hello");
-	std::cout << std::endl;
-	std::cout << Shrubby_form << std::endl;
-	Mr_Shrubby.signForm(Shrubby_form);
-	std::cout << Shrubby_form << std::endl;
-	Mr_Shrubby.executeForm(Shrubby_form);
-
-	std::cout << "\033[33m" << std::endl << "Test ex02 RobotomyRequestForm" << "\033[0m" << std::endl;
-	RobotomyRequestForm Robo_form("I am a robo form");
-	Bureaucrat Mr_Robo("Mr_Robo", 45);
-
-	Mr_Robo.executeForm(Robo_form);
-	Mr_Robo.signForm(Robo_form);
-	Mr_Robo.executeForm(Robo_form);
-	Mr_Robo.executeForm(Robo_form);
-	Mr_Robo.executeForm(Robo_form);
-
-	std::cout << "\033[33m" << std::endl << "Test ex02 PresidentialPardonForm" << "\033[0m" << std::endl;
-	PresidentialPardonForm President_form("I am a robo form");
-	Bureaucrat Mr_President("Mr_President", 5);
-
-	Mr_Robo.executeForm(President_form);
-	Mr_Robo.signForm(President_form);
-
-	Mr_President.executeForm(President_form);
-	Mr_President.signForm(President_form);
-	Mr_President.executeForm(President_form);
-	
+		std::cout << "\n--------------- Form 1 ( Shrubbery ) ---------------" << std::endl;
+		bureaucrat.signForm(form1);
+		bureaucrat.executeForm(form1);
+		std::cout << "\n--------------- Form 2 ( Robotomy ) ---------------" << std::endl;
+		bureaucrat.signForm(form2);
+		bureaucrat.executeForm(form2);
+		bureaucrat.executeForm(form2);
+		bureaucrat.executeForm(form2);
+		bureaucrat.executeForm(form2);
+		std::cout << "\n--------------- Form 3 ( President ) ---------------" << std::endl;
+		bureaucrat.signForm(form3);
+		bureaucrat.executeForm(form3);
+	}
+	catch (std::exception &e)
+	{
+       	std::cerr << "Exception: " << e.what() << std::endl;
+	}	
 	return (0);
 }
