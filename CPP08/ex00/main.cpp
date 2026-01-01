@@ -2,15 +2,11 @@
 
 int main()
 {
-    try
-    {
-        std::vector<int> vec;
-        for (int i = 0; i < 10; ++i)
-            vec.push_back(i * 10);
-        easyfind(vec, 30);
-    }
-    catch (const std::exception &e)
-    {
-        std::cerr << e.what() << std::endl;
-    }
+    std::vector<int> vec;
+
+    for (int i = 1; i <= 10; ++i)
+        vec.push_back(i);
+    easyfind(vec, 5);
+    easyfind(vec, 15);
+    return 0;
 }

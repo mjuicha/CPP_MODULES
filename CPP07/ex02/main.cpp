@@ -2,53 +2,43 @@
 #include "Array.hpp"
 #include "Array.tpp"
 
-#define MAX_VAL 750
-int main(int, char**)
+int main()
 {
-    Array<int> numbers(MAX_VAL);
-    int* mirror = new int[MAX_VAL];
-    srand(time(NULL));
-    for (int i = 0; i < MAX_VAL; i++)
-    {
-        const int value = rand();
-        numbers[i] = value;
-        mirror[i] = value;
-    }
-    //SCOPE
-    {
-        Array<int> tmp = numbers;
-        Array<int> test(tmp);
-    }
-    std::cout << "Checking values..." << std::endl;
-    for (int i = 0; i < MAX_VAL; i++)
-    {
-        if (mirror[i] != numbers[i])
-        {
-            std::cerr << "didn't save the same value!!" << std::endl;
-            return 1;
-        }
-    }
-    try
-    {
-        numbers[-2] = 0;
-    }
-    catch(const std::exception& e)
-    {
-        std::cerr << e.what() << '\n';
-    }
-    try
-    {
-        numbers[MAX_VAL] = 0;
-    }
-    catch(const std::exception& e)
-    {
-        std::cerr << e.what() << '\n';
-    }
+	Array<int> arr(5);
+	for (unsigned int i = 0; i < arr.size(); ++i)
+		arr[i] = i + 1;
+	std::cout << "Array elements:" << std::endl;
+	for (unsigned int i = 0; i < arr.size(); ++i)
+		std::cout << arr[i] << " ";
+	std::cout << std::endl;
+	try
+	{
+		std::cout << "Accessing out of range index:" << std::endl;
+		std::cout << arr[10] << std::endl;
+	}
+	catch (const std::out_of_range &e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
 
-    for (int i = 0; i < MAX_VAL; i++)
-    {
-        numbers[i] = rand();
-    }
-    delete [] mirror;//
-    return 0;
+	std::cout << "--------------------------------" << std::endl;
+
+	Array<char> arr2(5);
+	for (unsigned int i = 0; i < arr2.size(); ++i)
+		arr2[i] = 'a' + i;
+	std::cout << "Array elements:" << std::endl;
+	for (unsigned int i = 0; i < arr2.size(); ++i)
+		std::cout << arr2[i] << " ";
+	std::cout << std::endl;
+	try
+	{
+		std::cout << "Accessing out of range index:" << std::endl;
+		std::cout << arr2[10] << std::endl;
+	}
+	catch (const std::out_of_range &e)
+	{
+		std::cerr << e.what() << std::endl;
+	}
+
+	return 0;
 }

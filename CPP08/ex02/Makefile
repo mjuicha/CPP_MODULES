@@ -1,6 +1,6 @@
-SRCS = main.cpp 
+SRCS = main.cpp
 
-HEADER = Array.hpp
+HEADER = MutantStack.hpp
 
 OBJS = $(SRCS:%.cpp=%.o)
 
@@ -12,7 +12,7 @@ FLAGS = -Wall -Wextra -Werror -std=c++98
 
 all: $(NAME)
 
-$(NAME): $(OBJS) Array.tpp
+$(NAME): $(OBJS)
 	$(CC) $(FLAGS) $(OBJS) -o $(NAME)
 
 %.o: %.cpp $(HEADER)

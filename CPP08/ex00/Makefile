@@ -4,7 +4,7 @@ HEADER = easyfind.hpp
 
 OBJS = $(SRCS:%.cpp=%.o)
 
-NAME = xxxxxxx
+NAME = ex00
 
 CC = c++
 

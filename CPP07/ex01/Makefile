@@ -4,7 +4,7 @@ HEADER = iter.hpp
 
 OBJS = $(SRCS:%.cpp=%.o)
 
-NAME = program
+NAME = ex01
 
 CC = c++
 
@@ -15,7 +15,7 @@ all: $(NAME)
 $(NAME): $(OBJS)
 	$(CC) $(FLAGS) $(OBJS) -o $(NAME)
 
-%.o: %.cpp $(HEADER)å
+%.o: %.cpp $(HEADER)
 	$(CC) $(FLAGS) -c $< -o $@
 
 clean:	

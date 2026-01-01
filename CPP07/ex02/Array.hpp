@@ -13,10 +13,12 @@ template <typename T> class Array
         Array(unsigned int n);
         Array(const Array &other);
         Array &operator=(const Array &other);
-        int & operator[]( int index);
+        T       &operator[](unsigned int index);
+        const T &operator[](unsigned int index) const;
         ~Array();
 
-        T size() const;
+        unsigned int size() const { return size_; }
 };
+
 
 #endif

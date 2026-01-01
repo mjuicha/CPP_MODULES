@@ -4,7 +4,7 @@ HEADER = Span.hpp
 
 OBJS = $(SRCS:%.cpp=%.o)
 
-NAME = xxxxxxx
+NAME = ex01
 
 CC = c++
 

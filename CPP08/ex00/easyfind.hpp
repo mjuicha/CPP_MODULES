@@ -5,18 +5,13 @@
 #include <vector>
 #include <iostream>
 
-template <typename T> void  easyfind(T &container, int Int)
+template <typename T> void  easyfind(T &container, int value)
 {
-    for (typename T::iterator it = container.begin(); it != container.end(); ++it)
-    {
-        if (*it == Int)
-        {
-            std::cout << "Found: " << Int << std::endl;
-            return;
-        }
-    }
-    throw std::runtime_error("Value not found");
+    if (std::find(container.begin(), container.end(), value) != container.end())
+        std::cout << "Found " << value << std::endl;
+    else
+        std::cout << "Not Found " << value << std::endl;
 };
 
-
 #endif
+

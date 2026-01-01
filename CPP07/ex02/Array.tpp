@@ -1,52 +1,59 @@
 #include "Array.hpp"
 
-template <typename T> Array<T>::Array()
+template <typename T> Array<T>::Array() : arr(NULL), size_(0)
+{}
+
+template <typename T> Array<T>::Array(unsigned int n) : size_(n)
 {
-    this->arr = nullptr;
-    size_ = 0;
-    std::cout << "Default constructor called" << std::endl;
-    std::cout << "Array of size " << size_ << " created." << std::endl;
+    if (n > 0)
+        this->arr = new T[n];
+    else
+        this->arr = NULL;
 }
 
-template <typename T> Array<T>::Array(unsigned int n)
+template <typename T> Array<T>::Array(const Array &other) : size_(other.size_)
 {
-    this->arr = new T[n];
-    size_ = n;
-    std::cout << "Parameterized constructor called" << std::endl;
-    std::cout << "Array of size " << size_ << " created." << std::endl;
-}
-
-template <typename T> Array<T>::Array(const Array &other)
-{
-    this->size_ = other.size();
-    this->arr = new T[size_];
-    for (unsigned int i = 0; i < size_; i++)
-        this->arr[i] = other.arr[i];
+    if (size_ > 0)
+    {
+        this->arr = new T[size_];
+        for (unsigned int i = 0; i < size_; i++)
+            this->arr[i] = other.arr[i];
+    }
+    else
+        this->arr = NULL;
 }
 
 template <typename T> Array<T> &Array<T>::operator=(const Array &other)
 {
     if (this != &other)
     {
-        delete this->arr;
+        delete [] this->arr;
         this->size_ = other.size();
         this->arr = new T[size_];
-        for (unsigned int i = 0; i < size_; i++)
-            this->arr[i] = other.arr[i];
+        if (size_ > 0)
+        {
+            this->arr = new T[size_];
+            for (unsigned int i = 0; i < size_; i++)
+                this->arr[i] = other.arr[i];
+        }
+        else
+            this->arr = NULL;
     }
     return *this;
 }
 
-template <typename T> int & Array<T>::operator[](int index)
+template <typename T> T &Array<T>::operator[](unsigned int index)
 {
     if (index >= this->size() || index < 0)
         throw std::out_of_range("Index out of bounds");
     return this->arr[index];
 }
 
-template <typename T> T Array<T>::size() const
+template <typename T> const T &Array<T>::operator[](unsigned int index) const
 {
-    return this->size_;
+    if (index >= this->size() || index < 0)
+        throw std::out_of_range("Index out of bounds");
+    return this->arr[index];
 }
 
 template <typename T> Array<T>::~Array()
