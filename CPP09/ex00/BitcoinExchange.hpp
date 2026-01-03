@@ -7,6 +7,8 @@
 #include <fstream>
 #include <string>
 #include <stdexcept>
+#include <cstdlib>
+
 
 class BitcoinExchange
 {
@@ -26,5 +28,5 @@ class BitcoinExchange
 };
 
 std::string trim(const std::string &str);
-
+std::string Int2String(int number);
 #endif
