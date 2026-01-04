@@ -8,10 +8,9 @@ int main(int argc, char **argv)
         return 1;
     }
     
-    BitcoinExchange bitcoinExchange;
-
     try
     {
+        BitcoinExchange bitcoinExchange;
         bitcoinExchange.loadData("data.csv");
         bitcoinExchange.processInput(argv[1]);
     }

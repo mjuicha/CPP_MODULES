@@ -47,7 +47,7 @@ bool isDateValid(const std::string &date)
     month = std::atoi(date.substr(5, 2).c_str());
     day = std::atoi(date.substr(8, 2).c_str());
 
-    if (year < 2009 || month < 1 || month > 12 || day < 1 || day > 31)
+    if (month < 1 || month > 12 || day < 1 || day > 31)
         return false;
 
     int daysInMonth[] = {0, 31, (year % 4 == 0 && (year % 100 != 0 || year % 400 == 0)) ? 29 : 28,
@@ -86,24 +86,7 @@ void BitcoinExchange::loadData(const std::string &filename)
         }
     }
 
-    std::stringstream ss(line);
-    std::string date_col, value_col;
-
-    if (!std::getline(ss, date_col, ',') || !std::getline(ss, value_col, ','))
-    {
-        file.close();
-        throw std::runtime_error("Error at line " + Int2String(linecount) + ": invalid CSV header");
-    }
-    if (std::getline(ss, line))
-    {
-        file.close();
-        throw std::runtime_error("Error at line " + Int2String(linecount) + ": More than 2 fields");
-    }
-
-    date_col = trim(date_col);
-    value_col = trim(value_col);
-
-    if (date_col != "date" || value_col != "exchange_rate")
+    if (trim(line) != "date,exchange_rate")
     {
         file.close();
         throw std::runtime_error("Error at line " + Int2String(linecount) + ": invalid CSV header");
@@ -116,28 +99,22 @@ void BitcoinExchange::loadData(const std::string &filename)
         if (line.empty())
             continue;
 
-        std::stringstream ss(line);
         std::string date_str, value_str;
 
-        if (!std::getline(ss, date_str, ',') || !std::getline(ss, value_str, ','))
+        size_t commaPos = line.find(',');
+        if (commaPos == std::string::npos)
         {
             file.close();
             throw std::runtime_error("Error at line " + Int2String(linecount) + ": invalid CSV format");
         }
-        if (std::getline(ss, line))
-        {
-            file.close();
-            throw std::runtime_error("Error at line " + Int2String(linecount) + ": More than 2 fields");
-        }
-        date_str = trim(date_str);
-        value_str = trim(value_str);
 
+        date_str = trim(line.substr(0, commaPos));
+        value_str = trim(line.substr(commaPos + 1));
         if (date_str.empty() || value_str.empty())
         {
-            std::cerr << "Error at line " << linecount << ": empty date or value field" << std::endl;
-            continue;
+            file.close();
+            throw std::runtime_error("Error at line " + Int2String(linecount) + ": empty date or value field");
         }
-
         if (!isDateValid(date_str))
         {
             file.close();
@@ -159,7 +136,6 @@ void BitcoinExchange::loadData(const std::string &filename)
         data[date_str] = value;
     }
     file.close();
-    
     if (data.empty())
         throw std::runtime_error("Error: empty database file");
 }
@@ -237,8 +213,8 @@ void BitcoinExchange::processInput(const std::string &filename)
         }
         catch (const std::exception &e)
         {
-            std::cerr << "Error: bad value => " << value_str << std::endl;
+            std::cerr << e.what() << std::endl;
         }
-
     }
+    file.close();
 }
