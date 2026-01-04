@@ -18,7 +18,7 @@ class RPN
 
         int calculate(const std::string &expression);
         void makeOperation(char op);
-
+        void isOperationValid(int a, int b, char op);
         bool isOperator(char c);
         bool isNumber(char c);
 };

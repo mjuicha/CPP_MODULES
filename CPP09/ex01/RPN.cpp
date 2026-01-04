@@ -26,6 +26,42 @@ bool RPN::isNumber(char c)
     return (c >= '0' && c <= '9');
 }
 
+bool    multipleOverflow(int a, int b)
+{
+    if (a == 0 || b == 0)
+        return false;
+    if (a > 0 && b > 0 && a > INT_MAX / b)
+        return true;
+    if (a < 0 && b < 0 && -a > INT_MAX / -b)
+        return true;
+    if ((a > 0 && b < 0 && b < INT_MIN / a) || (a < 0 && b > 0 && a < INT_MIN / b))
+        return true;
+    return false;
+}
+
+void RPN::isOperationValid(int a, int b, char op)
+{
+    switch (op)
+    {
+        case '+':
+            if ((a > 0 && b > INT_MAX - a) || (a < 0 && b < INT_MIN - a))
+                throw std::runtime_error("Error");
+            break;
+        case '-':
+            if ((b < 0 && a > INT_MAX + b) || (b > 0 && a < INT_MIN + b))
+                throw std::runtime_error("Error");
+            break;
+        case '*':
+            if (multipleOverflow(a, b))
+                throw std::runtime_error("Error");
+            break;
+        case '/':
+            if (a == INT_MIN && b == -1)
+                throw std::runtime_error("Error");
+            break;
+    }
+}
+
 void RPN::makeOperation(char op)
 {
     if (numbers.size() < 2)
@@ -39,17 +75,21 @@ void RPN::makeOperation(char op)
     switch (op)
     {
         case '+':
+            isOperationValid(a, b, op);
             numbers.push(a + b);
             break;
         case '-':
+            isOperationValid(a, b, op);
             numbers.push(a - b);
             break;
         case '*':
+            isOperationValid(a, b, op);
             numbers.push(a * b);
             break;
         case '/':
             if (b == 0)
                 throw std::runtime_error("Error");
+            isOperationValid(a, b, op);
             numbers.push(a / b);
             break;
         default:
